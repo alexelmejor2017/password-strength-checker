@@ -24,6 +24,8 @@ Many people use insecure passwords, putting their online accounts at risk. I cre
 
 Simply run `pip install -r requirements.txt` in the repository's directory.
 
+You will need to download the [Rockyou List](https://github.com/zacheller/rockyou/raw/master/rockyou.txt.tar.gz), extract the file and paste it in the files directory.
+
 ## Thank you
 
 Thanks for using this project! If you found it helpful, please consider starring the repository. If you have any suggestions or improvements, feel free to open an issue or pull request. Your contributions are greatly appreciated!
