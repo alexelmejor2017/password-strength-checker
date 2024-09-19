@@ -16,15 +16,30 @@ Many people use insecure passwords, putting their online accounts at risk. I cre
 * Gives recommendations on how to make your password more robust.
 * Provides with estimated times that it would take to crack your password using different methods.
 * Checks if your password is in the rockyou list, which is a list of 14M+ breached passwords.
+* Allows you to use a custom wordlist for the password blacklist check and enable/disable it.
 
 ## Requirements
 
 * Python 3.8+
-* `requests`, `zxcvbn` and `colorama` libraries
+* `zxcvbn` and `colorama` libraries
 
-Simply run `pip install -r requirements.txt` in the repository's directory.
+## Usage
+
+How to download and run:
+
+`git clone https://github.com/alexelmejor2017/Password-Strength-Checker.git`
+
+`cd Password-Strength-Checker`
+
+`pip install -r requirements.txt`
+
+`python main.py`
+
+How to setup:
 
 You will need to download the [Rockyou List](https://github.com/zacheller/rockyou/raw/master/rockyou.txt.tar.gz), extract the file and paste it in the files directory.
+
+You can customize the password blacklist check in the file `config.ini`
 
 ## Thank you
 
