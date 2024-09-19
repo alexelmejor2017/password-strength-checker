@@ -27,13 +27,21 @@ Many people use insecure passwords, putting their online accounts at risk. I cre
 
 **How to download and run:**
 
-```git clone https://github.com/alexelmejor2017/Password-Strength-Checker.git```
+```
+git clone https://github.com/alexelmejor2017/Password-Strength-Checker.git
+```
 
-```cd Password-Strength-Checker```
+```
+cd Password-Strength-Checker
+```
 
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 
-```python main.py```
+```
+python main.py
+```
 
 **How to setup:**
 
