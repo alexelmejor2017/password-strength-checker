@@ -2,11 +2,20 @@ import re
 import string
 import random
 import math
-import requests
 import zxcvbn
 import os
+import configparser
 from colorama import init, Fore, Style
 init()
+
+# Load the configuration file
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Get the configuration values
+blacklist_check = config.getboolean('password_checker', 'blacklist_check')
+blacklist_file = config.get('password_checker', 'blacklist_file')
+blacklist_file = os.path.join('files', blacklist_file)
 
 # Function to check the strength score
 def password_strength(password):
@@ -101,9 +110,17 @@ def password_blacklisting(password):
     Checks the password against a list of known weak or compromised passwords.
     Returns a boolean indicating whether the password is blacklisted.
     """
-    with open("files/rockyou.txt", "r", encoding="utf-8", errors="replace") as f:
-        blacklist = [line.strip() for line in f.readlines()]
-    return password in blacklist
+    if blacklist_check:
+        try:
+            with open(blacklist_file, 'r', encoding='utf-8', errors='replace') as f:
+                blacklist = [line.strip() for line in f.readlines()]
+            return password in blacklist
+        except FileNotFoundError:
+            # Handling file not found
+            return None
+    else:
+        print("Blacklist check is disabled.")
+        return False
 
 # Main code
 def main():
@@ -133,12 +150,20 @@ def main():
         cracking_time = password_cracking_time_estimation(password)
         print(Fore.MAGENTA + cracking_time + Style.RESET_ALL)
         print()
-        print(Fore.GREEN + "Password Blacklisting: " + Style.RESET_ALL)
-        if password_blacklisting(password):
-            print(Fore.RED + "WARNING: This password is blacklisted. Please choose a different password." + Style.RESET_ALL)
+        if blacklist_check:
+            print(Fore.GREEN + "Password Blacklisting: " + Style.RESET_ALL)
+            print("Checking if password is blacklisted. This may take several seconds... " + Style.RESET_ALL)
+            result = password_blacklisting(password)
+            if result is None:
+                print(Fore.RED + "Error: Blacklist file not found." + Style.RESET_ALL)
+            elif result:
+                print(Fore.RED + "WARNING: This password is blacklisted. Please choose a different password." + Style.RESET_ALL)
+            else:
+                print(Fore.GREEN + "Password is not blacklisted." + Style.RESET_ALL)
+            print("\n" + "="*40 + "\n")
         else:
-            print(Fore.GREEN + "Password is not blacklisted." + Style.RESET_ALL)
-        print("\n" + "="*40 + "\n")
+            print(Fore.GREEN + "Password Blacklisting: Disabled" + Style.RESET_ALL)
+            print("\n" + "="*40 + "\n")
 
 if __name__ == "__main__":
     main()
