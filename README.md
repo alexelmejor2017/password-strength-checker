@@ -1,6 +1,6 @@
 # Password Strength Evaluation Tool
 
-Hello 👋. The Password Strength Evaluation Tool is a Python tool that allows you to analyze how secure your password are.
+Hello 👋. The Password Strength Evaluation Tool is a Python tool that allows you to analyze how secure your password is.
 
 ## DISCLAIMER
 
