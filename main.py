@@ -113,8 +113,10 @@ def password_blacklisting(password):
     if blacklist_check:
         try:
             with open(blacklist_file, 'r', encoding='utf-8', errors='replace') as f:
-                blacklist = [line.strip() for line in f.readlines()]
-            return password in blacklist
+                for line in f:
+                    if line.strip() == password:
+                        return True
+            return False
         except FileNotFoundError:
             # Handling file not found
             return None
