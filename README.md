@@ -36,16 +36,8 @@ cd Password-Strength-Checker
 ```
 
 ```
-pip install -r requirements.txt
-```
-
-For Linux users:
-
-```
 pip install -r requirements.txt --break-system-packages
 ```
-
-
 
 ```
 python main.py
